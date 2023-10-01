@@ -1,0 +1,23 @@
+version: "3.9"
+
+networks:
+  <yourNetwork>:
+    external: true
+
+services:
+  openvas:
+    image: immauss/openvas:22.4.28
+    container_name: openvas
+    restart: unless-stopped
+    environment:
+      - "PASSWORD=admin"
+      - "USERNAME=admin"
+      - "HTTPS=true" # wether to use HTTPS or not
+      - "TZ=Europe/Rome"
+    ports:
+      - 9392:9392
+    volumes:
+      - ~/openvas-volume/data:/data
+      - ~/openvas-volume/opt:/opt
+    networks:
+      - OpenVasNet
