@@ -12,7 +12,7 @@ Prometheus collects and stores its metrics as time series data, i.e. metrics inf
 - run `docker-compose up -d`
 
 ## Grafana
-After completing the login using admin:admin you need to add Prometheus to the datasource list using the following link: `http://prometheus:9090`</br>
+After completing the login using `admin:admin` you need to add Prometheus to the datasource list using the following link: `http://prometheus:9090`</br>
 Then import the following dashboards from the official Grafana repo:</br>
 - https://grafana.com/grafana/dashboards/1860-node-exporter-full/
 - https://grafana.com/grafana/dashboards/14282-cadvisor-exporter/
