@@ -1,0 +1,53 @@
+version: '3.7'
+networks:
+  <yourNetwork>:
+    external: true
+
+volumes:
+  grafana-data:
+    driver: local
+
+services:
+  loki:
+    image: grafana/loki
+    container_name: loki
+    volumes:
+      - /etc/loki:/etc/loki # you can edit the local path
+    ports:
+      - 3100:3100
+    restart: unless-stopped
+    command: -config.file=/etc/loki/loki-config.yml
+    networks:
+      - <yourNetwork>
+    environment:
+      TZ: 'Europe/Rome'
+
+  promtail:
+    image: grafana/promtail
+    container_name: promtail
+    volumes:
+      - /var/log:/var/log # give access to server logs in order to send them to Loki
+      - /etc/promtail:/etc/promtail # you can edit the local path
+    #ports:
+    #  - 1514:1514 # this is only needed if you are going to send syslogs
+    restart: unless-stopped
+    command: -config.file=/etc/promtail/promtail-config.yml
+    networks:
+      - <yourNetwork>
+    environment:
+      TZ: 'Europe/Rome'
+    depends_on:
+      - loki
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    environment:
+      TZ: 'Europe/Rome'
+    restart: unless-stopped
+    networks:
+      - <yourNetwork>
