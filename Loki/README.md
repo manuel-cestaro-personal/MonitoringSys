@@ -8,10 +8,15 @@ A log stream is a set of logs which share the same labels. Labels help Loki to f
 Log data is then compressed and stored in chunks in an object store such as Amazon Simple Storage Service (S3) or Google Cloud Storage (GCS), or even, for development or proof of concept, on the filesystem. A small index and highly compressed chunks simplify the operation and significantly lower the cost of Loki.</br>
 
 ## Start
-EDIT
-- `sudo mkdir /etc/prometheus`
-- `sudo nano /etc/prometheus/prometheus.yml`
-- copy and paste the file at `./config/prometheus.yml`
+- `docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions`
+- `sudo nano /etc/docker/daemon.json`
+- copy and paste the file at `./config/daemon.json`
+- `sudo mkdir /etc/loki` or a directory that you want use as docker volume
+- `sudo nano /etc/loki/loki-config.yml`
+- copy and paste the file at `./config/loki-config.yml`
+- `sudo mkdir /etc/promtail` or a directory that you want use as docker volume
+- `sudo nano /etc/promtail/promtail-config.yml`
+- copy and paste the file at `./config/promtail-config.yml`
 - create your docker network and replace `<yourNetwork>` in the `docker-compose` file
 - run `docker-compose up -d`
 
