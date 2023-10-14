@@ -18,9 +18,8 @@ EDIT
 ## Grafana
 After completing the login using `admin:admin` you need to add Loki to the datasource list using the following link: `http://loki:3100`</br>
 Then import the following dashboards from the official Grafana repo:</br>
-- https://grafana.com/grafana/dashboards/14055-loki-stack-monitoring-promtail-loki/
-- https://grafana.com/grafana/dashboards/13639-logs-app/
-- https://grafana.com/grafana/dashboards/16970-container-log-quick-search/
+- https://grafana.com/grafana/dashboards/13639-logs-app/ (linux logs)
+- https://grafana.com/grafana/dashboards/12611-logging-dashboard-via-loki/ (use V1, error in v2)
 
 
 ## Sources
