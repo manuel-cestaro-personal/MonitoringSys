@@ -1,0 +1,29 @@
+###########################################################################################################################
+#
+# In case of external promtail installation from the loki server you must change the path in the:
+# - /etc/docker/daemon.json
+# - /etc/promtail/promtail-config.yml
+# with IP and Port of your Loki installation
+#
+###########################################################################################################################
+
+version: '3.7'
+networks:
+  <yourNetwork>:
+    external: true
+
+services:
+  promtail:
+    image: grafana/promtail
+    container_name: promtail
+    volumes:
+      - /var/log:/var/log # give access to server logs in order to send them to Loki
+      - /etc/promtail:/etc/promtail # you can edit the local path
+    #ports:
+    #  - 1514:1514 # this is only needed if you are going to send syslogs
+    restart: unless-stopped
+    command: -config.file=/etc/promtail/promtail-config.yml # use your volume path
+    networks:
+      - <yourNetwork>
+    environment:
+      TZ: 'Europe/Rome'
