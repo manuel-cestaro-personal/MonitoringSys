@@ -11,6 +11,7 @@ Log data is then compressed and stored in chunks in an object store such as Amaz
 - `docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions`
 - `sudo nano /etc/docker/daemon.json`
 - copy and paste the file at `./config/daemon.json`
+- `sudo systemctl restart docker`
 - `sudo mkdir /etc/loki` or a directory that you want use as docker volume
 - `sudo nano /etc/loki/loki-config.yml`
 - copy and paste the file at `./config/loki-config.yml`
